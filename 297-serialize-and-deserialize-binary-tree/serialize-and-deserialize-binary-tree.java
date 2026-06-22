@@ -56,7 +56,7 @@ public class Codec {
                     q.add(cur.left);
                 }
                 counter++;
-                if(counter<values.length && !values[counter].equals("#")){
+                if(!values[counter].equals("#")){
                     cur.right = new TreeNode(Integer.parseInt(values[counter]));
                     q.add(cur.right);
                 }
