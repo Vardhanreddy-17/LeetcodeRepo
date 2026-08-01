@@ -1,14 +1,15 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        Map<Integer,Integer> mp = new HashMap<>();
-        for(int i=0;i<nums.length;i++){
-            mp.put(nums[i],mp.getOrDefault(nums[i],0)+1);
-        }
-        for(int key:mp.keySet()){
-            if(mp.get(key)==1){
-                return key;
+        int ans = 0;
+        for(int i=0;i<32;i++){
+            int count = 0;
+            for(int j=0;j<nums.length;j++){
+                if((nums[j]&(1<<i))!=0) count++;
+            }
+            if(count%3!=0){
+                ans = ans | (1<<i);
             }
         }
-        return -1;
+        return ans;
     }
 }
