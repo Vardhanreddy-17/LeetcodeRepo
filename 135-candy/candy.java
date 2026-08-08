@@ -1,36 +1,27 @@
 class Solution {
     public int candy(int[] ratings) {
+        int sum = 1;
+        int i = 1;
         int n = ratings.length;
-        int left[] = new int[n];
-        int right[] = new int[n];
-        int candy1 = 1;
-        int candy2 = 1;
-        left[0] = 1;
-        right[0] = 1;
-        int sum = 0;
-        for(int i=1;i<n;i++){
-            if(ratings[i-1]<ratings[i]){
-                candy1++;
-                left[i] = candy1;
-            }else{
-                candy1 = 1;
-                left[i] = candy1;
+        while(i<n){
+            while(i<n && ratings[i]==ratings[i-1]){
+                i++;
+                sum+=1;
             }
-            if(ratings[n-i-1]>ratings[n-i]){
-                candy2++;
-                right[n-i-1] = candy2;
-            }else{
-                candy2 = 1;
-                right[n-i-1] = candy2;
+            int peek = 1;
+            while(i<n && ratings[i]>ratings[i-1]){
+                i++;
+                peek++;
+                sum+=peek;
             }
-        }
-        for(int i=0;i<n;i++){
-            if(left[i]>=right[i]){
-                ratings[i] = left[i];
-                sum+=ratings[i];
-            }else{
-                ratings[i] = right[i];
-                sum+=ratings[i];
+            int down = 1;
+            while(i<n && ratings[i]<ratings[i-1]){
+                i++;
+                sum+=down;
+                down++;
+            }
+            if(down>peek){
+                sum+=(down-peek);
             }
         }
         return sum;
