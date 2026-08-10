@@ -7,12 +7,15 @@ class Solution {
         int max = 0;
         while(right<n && left<n){
             char ch = s.charAt(right);
-            while(mp.containsKey(ch)){
-                mp.remove(s.charAt(left));
-                left++;
+            if(mp.containsKey(ch)){
+                if(mp.get(ch)<left){
+                    mp.put(ch,right);
+                }else{
+                    left = mp.get(ch)+1;
+                }
             }
             mp.put(ch,right);
-            max = Math.max(max,mp.size());
+            max = Math.max(max,right-left+1);
             right = right+1;
         }
         return max;
