@@ -13,32 +13,32 @@ class Solution {
         if(head==null || head.next==null){
             return true;
         }
-        ListNode fast = head.next;
         ListNode slow = head;
+        ListNode fast = head.next;
         while(fast!=null && fast.next!=null){
             slow = slow.next;
             fast = fast.next.next;
         }
-        ListNode mid = rev(slow.next);
-        slow.next=null;
-        ListNode first = head;
-        ListNode second = mid;
-        while(second!=null){
-            if(first.val!=second.val){
+        ListNode right = slow.next;
+        slow.next = null;
+        ListNode left = head;
+        ListNode newRightHead = reverse(right);
+        while(left!=null && newRightHead!=null){
+            if(left.val!=newRightHead.val){
                 return false;
             }
-            first = first.next;
-            second = second.next;
+            left = left.next;
+            newRightHead = newRightHead.next;
         }
         return true;
     }
-    public ListNode rev(ListNode head){
-        ListNode c= head;
+    public ListNode reverse(ListNode head){
+        ListNode c = head;
         ListNode n = null;
         ListNode p = null;
         while(c!=null){
             n = c.next;
-            c.next= p;
+            c.next = p;
             p = c;
             c = n;
         }
