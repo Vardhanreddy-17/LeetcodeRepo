@@ -1,12 +1,11 @@
 class Solution {
     public int numberOfSubstrings(String s) {
-        int max = 0;
+        int arr[] = new int[3];
         int count = 0;
-        int[] hash = new int[3];
-        Arrays.fill(hash,-1);
+        Arrays.fill(arr,-1);
         for(int i=0;i<s.length();i++){
-            hash[s.charAt(i)-'a'] = i;
-            count= count + (1+Math.min(hash[0],Math.min(hash[1],hash[2])));
+            arr[s.charAt(i)-'a'] = i;
+            count+= 1+Math.min(arr[0],Math.min(arr[1],arr[2]));
         }
         return count;
     }
