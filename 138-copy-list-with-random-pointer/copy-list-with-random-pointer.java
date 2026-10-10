@@ -15,16 +15,16 @@ class Node {
 
 class Solution {
     public Node copyRandomList(Node head) {
-        Node temp = head;
         Map<Node,Node> mp = new HashMap<>();
+        Node temp = head;
         while(temp!=null){
-            Node deepCopy = new Node(temp.val);
-            mp.put(temp,deepCopy);
+            Node nn = new Node(temp.val);
+            mp.put(temp,nn);
             temp = temp.next;
         }
-        Node nn = new Node(-1);
-        Node tail = nn;
         temp = head;
+        Node dummy = new Node(-1);
+        Node tail = dummy;
         while(temp!=null){
             Node deepCopy = mp.get(temp);
             deepCopy.next = mp.get(temp.next);
@@ -33,7 +33,6 @@ class Solution {
             tail = deepCopy;
             temp = temp.next;
         }
-        return nn.next;
+        return dummy.next;
     }
-
 }
